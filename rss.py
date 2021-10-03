@@ -43,11 +43,11 @@ def create_feed_checker(feed_url):
         entry = FEED.entries[0]
         if entry.id != db.get_link(feed_url).link:
                        # ↓ Edit this message as your needs.
-            message = f"**{entry.title}**\n```{entry.link}```"
+            message = f"**{entry.title}**\n```{entry.link}```" #msg = f"/mirror entry['torrent_magneturi']"
             try:
                 app.send_message(log_channel, message)
                 if app2 is not None:
-                    mirr_msg = f"{mirr_cmd} {entry.link}"
+                    mirr_msg = f"{mirr_cmd} entry['torrent_magneturi']"
                     app2.send_message(mirr_chat, mirr_msg)
                 db.update_link(feed_url, entry.id)
             except FloodWait as e:
